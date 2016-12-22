@@ -74,7 +74,6 @@
   }
   .live.map .node g div span.consumers {
     display: inline-block;
-    width: 20px;
   }
   .live.map .edgeLabel text {
     width: 50px;

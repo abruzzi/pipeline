@@ -15,9 +15,14 @@ $(function() {
 
     var editor = new JSONEditor(container, options);
     
-    $.get('/data/pipeline-1.json').done(function(data) {
+    $.get('/data/pipeline-2.json').done(function(data) {
         editor.set(data);
         draw(data, false);
+    });
+
+    $('#create').on('click', function(e) {
+        var data = editor.get();
+        draw(data, true);
     });
 
   // Set up zoom support
@@ -43,14 +48,14 @@ $(function() {
   });
 
   function draw(data, isUpdate) {
-    _.each(data.states, function(state, id) {
+    _.each(data.states, function(state, key) {
         var className = state.name ? "running" : "stopped";
         var html = "<div>";
           html += "<span class='status'></span>";
           html += "<span class='consumers'>"+state.name+"</span>";
           html += "</div>";
       
-      g.setNode(id, {
+      g.setNode(key, {
         labelType: "html",
         label: html,
         rx: 5,
@@ -59,26 +64,17 @@ $(function() {
         class: className
       });
 
-      var x = _.keys(data.flow[state.name])[0];
-      if(x) {
-          g.setEdge(id, x, {
-              label: "edge",
-              width: 40
-            });  
-      }
+      var downStreams = _.keys(data.flow[state.name]);
+      _.each(downStreams, function(downStream) {
+        g.setEdge(key, downStream, {
+          label: "edge",
+          width: 40
+        });  
+      });
+
     })
 
     inner.call(render, g);
-    // Zoom and scale to fit
-    var graphWidth = g.graph().width + 80;
-    var graphHeight = g.graph().height + 40;
-    var width = parseInt(svg.style("width").replace(/px/, ""));
-    var height = parseInt(svg.style("height").replace(/px/, ""));
-    var zoomScale = Math.min(width / graphWidth, height / graphHeight);
-    var translate = [(width/2) - ((graphWidth*zoomScale)/2), (height/2) - ((graphHeight*zoomScale)/2)];
-    zoom.translate(translate);
-    zoom.scale(zoomScale);
-    zoom.event(isUpdate ? svg.transition().duration(500) : d3.select("svg"));
   }
 });
 
