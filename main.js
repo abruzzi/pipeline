@@ -15,10 +15,10 @@ $(function() {
 
     var editor = new JSONEditor(container, options);
     
-    $.get('/data/pipeline-2.json').done(function(data) {
-        editor.set(data);
-        draw(data, false);
-    });
+    // $.get('/data/pipeline-1.json').done(function(data) {
+    //     editor.set(data);
+    //     draw(data, false);
+    // });
 
     $('#create').on('click', function(e) {
         var data = editor.get();
@@ -49,7 +49,7 @@ $(function() {
 
   function draw(data, isUpdate) {
     _.each(data.states, function(state, key) {
-        var className = state.name ? "running" : "stopped";
+        var className = "running";
         var html = "<div>";
           html += "<span class='status'></span>";
           html += "<span class='consumers'>"+state.name+"</span>";
