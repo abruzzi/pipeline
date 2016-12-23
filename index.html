@@ -20,32 +20,50 @@
         <link rel="stylesheet" href="node_modules/jointjs/dist/joint.min.css">
     </head>
     <body>
-    	<div class="main container">
-    		
-    		<div class="row">
-    			<div class="col-lg-12">
-    				<div id="jsoneditor"></div>
-    			</div>
-    		</div>
 
-			<div class="row control">
-				<div class="col-lg-12">
-					<button id="create">Create Pipeline</button>	
-				</div>				
+		<div class="container main">	
+			<ul class="nav nav-tabs">
+				<li class="active">
+	        	<a href="#1" data-toggle="tab">Pipeline</a>
+				</li>
+				<li>
+				<a href="#2" data-toggle="tab">Execuation</a>
+				</li>
+			</ul>
+
+			<div class="tab-content">
+			  	<div class="tab-pane active" id="1">
+		    		<div class="row">
+		    			<div class="col-lg-12">
+		    				<div id="jsoneditor"></div>
+		    			</div>
+		    		</div>
+
+					<div class="row control">
+						<div class="col-lg-12">
+							<button id="create">Create Pipeline</button>	
+						</div>				
+					</div>
+
+		    		<div class="row">
+		    			<div class="col-lg-12">
+		    				<div class="live map">
+							  <svg id="pipelineCanvas"><g/></svg>
+							</div>
+		    			</div>
+		    		</div>
+				</div>
+				<div class="tab-pane" id="2">
+          			<h3>Notice the gap between the content and tab after applying a background color</h3>
+				</div>
 			</div>
 
-    		<div class="row">
-    			<div class="col-lg-12">
-    				<div class="live map">
-					  <svg><g/></svg>
-					</div>
-    			</div>
-    		</div>
-    	</div>
+  		</div>
 
         <script src="node_modules/jsoneditor/dist/jsoneditor.js"></script>
 
         <script src="node_modules/jquery/dist/jquery.js"></script>
+        <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
         <script src="node_modules/lodash/index.js"></script>
 		<script src="node_modules/graphlib/dist/graphlib.core.js"></script>
 		<script src="node_modules/dagre/dist/dagre.core.js"></script>

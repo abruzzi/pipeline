@@ -48,6 +48,7 @@ $(function() {
   });
 
   function draw(data, isUpdate) {
+    // $("#pipelineCanvas").empty();
     _.each(data.states, function(state, key) {
         var className = "running";
         var html = "<div>";
@@ -72,7 +73,7 @@ $(function() {
         });  
       });
 
-    })
+    });
 
     inner.call(render, g);
   }

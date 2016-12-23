@@ -1,9 +1,9 @@
 #create {
 	padding-top: 10px;
 	padding-bottom: 10px;
-	width: 200px;
-	background-color: #94399E;
-	border: 1px solid #ccc;
+	width: 300px;
+	background-color: #3883FA;
+	border: none;
 	color: #fff;
 }
 
@@ -29,7 +29,7 @@ body, input, textarea, select, button {
   
   .live.map {
     width: 100%;
-    height: 400px;
+    height: 500px;
     background: url("/images/background/debut_light.png") repeat;
   }
 
@@ -38,15 +38,18 @@ body, input, textarea, select, button {
     height: 100%;
     overflow: hidden;
   }
+
   .live.map text {
     font-weight: 300;
     font-size: 14px;
   }
+
   .live.map .node rect {
-    stroke-width: 1.5px;
+    stroke-width: 0.5px;
     stroke: #bbb;
     fill: #666;
   }
+
   .live.map .status {
     height: 100%;
     width: 15px;
@@ -56,28 +59,36 @@ body, input, textarea, select, button {
     border-bottom-left-radius: 5px;
     margin-right: 4px;
   }
+
   .live.map .running .status {
     background-color: #7f7;
   }
+
   .live.map .running.warn .status {
     background-color: #ffed68;
   }
+
   .live.map .stopped .status {
     background-color: #f77;
   }
+
   .live.map .warn .queue {
     color: #f77;
   }
+
   .warn {
     -webkit-animation-name: flash;
     animation-name: flash;
   }
+
   .live.map .consumers {
     margin-right: 2px;
+    text-transform: capitalize;
   }
+
   .live.map .consumers,
   .live.map .name {
-    margin-top: 4px;
+    margin-top: 14px;
   }
 
   .live.map .queue {
@@ -88,18 +99,22 @@ body, input, textarea, select, button {
     font-size: 12px;
     margin-top: 2px;
   }
+
   .live.map .node g div {
     width: 200px;
     height: 40px;
     color: #fff;
   }
+
   .live.map .node g div span.consumers {
     display: inline-block;
   }
+
   .live.map .edgeLabel text {
     width: 50px;
     fill: #fff;
   }
+
   .live.map .edgePath path {
     stroke: #999;
     stroke-width: 1.5px;
