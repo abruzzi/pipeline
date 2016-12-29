@@ -15,20 +15,27 @@ $(function() {
 
     var editor = new JSONEditor(container, options);
     
-    // $.get('/data/pipeline-1.json').done(function(data) {
-    //     editor.set(data);
-    //     draw(data, false);
-    // });
+    $.get('/data/pipeline-2.json').done(function(data) {
+        editor.set(data);
+    });
 
     $('#create').on('click', function(e) {
         var data = editor.get();
-        draw(data, true);
+        draw(data);
     });
 
+
+  function draw(data) {
+    var width = 960,
+        height = 400,
+        center = [width / 2, height / 2];
+
   // Set up zoom support
-  var svg = d3.select("svg"),
-      inner = svg.select("g"),
-      zoom = d3.behavior.zoom().on("zoom", function() {
+  var svg = d3.select("svg");
+  var inner = svg.select("#canvas");
+
+    var zoom = d3.behavior.zoom()
+        .on("zoom", function() {
         inner.attr("transform", "translate(" + d3.event.translate + ")" +
                                     "scale(" + d3.event.scale + ")");
       });
@@ -47,8 +54,6 @@ $(function() {
     marginy: 20
   });
 
-  function draw(data, isUpdate) {
-    // $("#pipelineCanvas").empty();
     _.each(data.states, function(state, key) {
         var className = "running";
         var html = "<div>";
@@ -76,6 +81,28 @@ $(function() {
     });
 
     inner.call(render, g);
-  }
-});
+    
+    var initialScale = 1;
+    var _height = svg.attr('height') - g.graph().height;
+    var _width = svg.attr('width') - g.graph().width;
 
+    var padding = 10,
+        bBox = inner.node().getBBox(),
+        hRatio = height / (bBox.height + padding),
+        wRatio = width / (bBox.width + padding);
+        
+    zoom.translate([(width - bBox.width * initialScale) / 2, padding / 2])
+        .scale(hRatio < wRatio ? hRatio : wRatio)
+      .event(svg);
+  }
+
+    $.get('/data/pipelines.json').done(function(data) {
+        _.each(data.pipelines, function(pipeline) {
+            $('<option></option>').attr('value', pipeline).text(pipeline).appendTo($('#pipelines'));
+        });
+    })
+
+    $('#execute').on('click', function(e) {
+        alert('running '+$('#pipelines').val());
+    });
+});

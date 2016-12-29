@@ -7,6 +7,15 @@
 	color: #fff;
 }
 
+#execute {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	width: 200px;
+	background-color: #3883FA;
+	border: none;
+	color: #fff;
+}
+
 .control {
 	text-align: center;
 	margin-top: 20px;
